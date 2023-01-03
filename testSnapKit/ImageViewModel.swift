@@ -8,7 +8,9 @@
 import Foundation
 
 class ImageViewModel {
-    let dataSourceArray : [CellModel] = [CellModel(authorName: "Author Name", authorID: "3501231", imageURL: <#T##URL#>)]
+    let dataSourceArray : [CellModel] = [CellModel(authorName: "Author Name", authorID: "3501231", imageURL: someURL!)]
     // create Array with param
     // look API LINK
+    // myAPI = 32429265-cb3e24df40f343b0f6ba5900a
 }
+    let someURL = URL(string: "google.com")
