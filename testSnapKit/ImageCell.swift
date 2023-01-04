@@ -16,6 +16,8 @@ class ImageCell: UICollectionViewCell {
         imageView.image = UIImage(named: "1")
         imageView.layer.cornerRadius = 15
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = UIView.ContentMode.scaleAspectFit
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -24,6 +26,7 @@ class ImageCell: UICollectionViewCell {
         authorLabel.textColor = .white
         authorLabel.font = UIFont(name: "AppleSDGothicNeo-Regular",size: 15)
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
+        authorLabel.text = "Some Authour"
         return authorLabel
         
     }()
@@ -33,6 +36,7 @@ class ImageCell: UICollectionViewCell {
         authorIDLabel.textColor = #colorLiteral(red: 0.6666666269, green: 0.6666668057, blue: 0.67097193, alpha: 1)
         authorIDLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 13)
         authorIDLabel.translatesAutoresizingMaskIntoConstraints = false
+        authorIDLabel.text = "SomeID "
         return authorIDLabel
     }()
     
@@ -46,7 +50,7 @@ class ImageCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         contentView.addSubview(authorLabel)
         contentView.addSubview(authorIDLabel)
-        
+        constraintOfCellElements()
         
     }
     
@@ -56,6 +60,16 @@ class ImageCell: UICollectionViewCell {
             make.left.equalTo(contentView)
             make.top.equalTo(contentView)
             make.right.equalTo(contentView)
+        }
+        
+        authorLabel.snp.makeConstraints { make in
+            make.top.equalTo(imageView).inset(30)
+            make.left.equalTo(imageView.snp_rightMargin).inset(30)
+        }
+        
+        authorIDLabel.snp.makeConstraints { make in
+            make.left.equalTo(authorLabel)
+            make.top.equalTo(authorLabel).inset(40)
         }
         
     }
