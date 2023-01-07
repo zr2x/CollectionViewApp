@@ -10,23 +10,24 @@ import UIKit
 //TODO: create image/ create title/
 
 class ImageCell: UICollectionViewCell {
-    let imageView : UIImageView = {
+    
+     let imageView : UIImageView = {
         
         let imageView = UIImageView()
         imageView.image = UIImage(named: "1")
-        imageView.layer.cornerRadius = 15
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = UIView.ContentMode.scaleAspectFit
         imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 25
         return imageView
     }()
     
     let authorLabel : UILabel = {
         let authorLabel = UILabel()
         authorLabel.textColor = .white
-        authorLabel.font = UIFont(name: "AppleSDGothicNeo-Regular",size: 15)
+        authorLabel.font = UIFont(name: "AppleSDGothicNeo-Regular",size: 14)
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
-        authorLabel.text = "Some Authour"
+        authorLabel.numberOfLines = 0
         return authorLabel
         
     }()
@@ -34,19 +35,22 @@ class ImageCell: UICollectionViewCell {
     let authorIDLabel : UILabel = {
         let authorIDLabel = UILabel()
         authorIDLabel.textColor = #colorLiteral(red: 0.6666666269, green: 0.6666668057, blue: 0.67097193, alpha: 1)
-        authorIDLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 13)
+        authorIDLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 12)
         authorIDLabel.translatesAutoresizingMaskIntoConstraints = false
-        authorIDLabel.text = "SomeID "
+        authorIDLabel.numberOfLines = 0
         return authorIDLabel
     }()
     
     
     func configure(cellModel: CellModel) {
-        
+        authorLabel.text = cellModel.authorName
+        authorIDLabel.text = cellModel.authorID
+//        imageView.image = cellModel.imageURL
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        contentView.backgroundColor = .black
         contentView.addSubview(imageView)
         contentView.addSubview(authorLabel)
         contentView.addSubview(authorIDLabel)
@@ -59,17 +63,20 @@ class ImageCell: UICollectionViewCell {
         imageView.snp.makeConstraints { make in
             make.left.equalTo(contentView)
             make.top.equalTo(contentView)
-            make.right.equalTo(contentView)
+            make.right.equalTo(contentView).inset(100)
+            make.bottom.equalTo(contentView)
         }
         
         authorLabel.snp.makeConstraints { make in
-            make.top.equalTo(imageView).inset(30)
-            make.left.equalTo(imageView.snp_rightMargin).inset(30)
+            make.top.equalTo(imageView).inset(20)
+            make.left.equalTo(imageView.snp_rightMargin).inset(-20)
+            make.right.equalTo(contentView)
         }
         
         authorIDLabel.snp.makeConstraints { make in
             make.left.equalTo(authorLabel)
             make.top.equalTo(authorLabel).inset(40)
+            make.right.equalTo(authorLabel)
         }
         
     }

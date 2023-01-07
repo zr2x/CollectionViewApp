@@ -25,16 +25,19 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
 
         view.addSubview(collectionView)
         collectionView.backgroundColor = #colorLiteral(red: 0.1333333254, green: 0.1333333254, blue: 0.1333333254, alpha: 1)
+        
+        
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
         
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.width - 10) / 2
         
-        return CGSize(width: width, height: width)
+        return CGSize(width: width, height: width / 2)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -47,5 +50,51 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.dataSourceArray.count
     }
+    //FIXME: header func
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header", for: indexPath) as! Header
+        header.nameTitle = "Photo"
+        return header
+        
 }
+
+    
+}
+
+
+//MARK: trying creat header
+class Header: UICollectionReusableView {
+    
+        let nameLabel: UILabel = {
+               let label = UILabel()
+               label.numberOfLines = 1
+               label.font = UIFont.systemFont(ofSize: 18)
+               label.sizeToFit()
+               label.textAlignment = .left
+               label.translatesAutoresizingMaskIntoConstraints = false
+               return label
+           }()
+    
+    var nameTitle: String? {
+            didSet {
+                nameLabel.text = nameTitle
+            }
+
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(nameLabel)
+        
+        nameLabel.snp.makeConstraints { make in
+//            make.edges.equalTo()
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
 

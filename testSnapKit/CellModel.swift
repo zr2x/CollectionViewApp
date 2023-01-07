@@ -9,9 +9,9 @@ import Foundation
 
 struct CellModel {
     
-    let authorName : String
-    let authorID : String
-    let imageURL : URL
+     let authorName : String
+     let authorID : String
+     let imageURL : URL
     
     
 }
