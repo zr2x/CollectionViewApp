@@ -45,17 +45,25 @@ class ImageCell: UICollectionViewCell {
     func configure(cellModel: CellModel) {
         authorLabel.text = cellModel.authorName
         authorIDLabel.text = cellModel.authorID
+        //FIXME: convert image to url
 //        imageView.image = cellModel.imageURL
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .black
+
+//        contentView.snp.makeConstraints { make in
+//            make.leftMargin.equalToSuperview().inset(100)
+//        }
         contentView.addSubview(imageView)
         contentView.addSubview(authorLabel)
         contentView.addSubview(authorIDLabel)
-        constraintOfCellElements()
+       
         
+        
+    }
+    override func layoutSubviews() {
+        constraintOfCellElements()
     }
     
     private func constraintOfCellElements() {
@@ -68,7 +76,7 @@ class ImageCell: UICollectionViewCell {
         }
         
         authorLabel.snp.makeConstraints { make in
-            make.top.equalTo(imageView).inset(20)
+            make.top.equalTo(imageView).inset(10)
             make.left.equalTo(imageView.snp_rightMargin).inset(-20)
             make.right.equalTo(contentView)
         }
