@@ -58,6 +58,7 @@ class ImageCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         contentView.addSubview(authorLabel)
         contentView.addSubview(authorIDLabel)
+        
        
         
         

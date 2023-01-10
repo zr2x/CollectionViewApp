@@ -23,15 +23,18 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = #colorLiteral(red: 0.1333333254, green: 0.1333333254, blue: 0.1333333254, alpha: 1)
+//        view.backgroundColor = #colorLiteral(red: 0.1333333254, green: 0.1333333254, blue: 0.1333333254, alpha: 1)
         view.addSubview(collectionView)
         collectionView.backgroundColor = #colorLiteral(red: 0.1333333254, green: 0.1333333254, blue: 0.1333333254, alpha: 1)
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+
         
         
         collectionView.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(10)
-            make.right.equalToSuperview().inset(10)
-            make.top.bottom.equalToSuperview()
+            make.edges.equalToSuperview()
+//            make.left.equalToSuperview().inset(10)
+//            make.right.equalToSuperview().inset(10)
+//            make.top.bottom.equalToSuperview()
         }
         
         
