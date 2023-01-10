@@ -17,6 +17,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.register(Header.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
         return collectionView
     }()
     
@@ -26,7 +27,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
 //        view.backgroundColor = #colorLiteral(red: 0.1333333254, green: 0.1333333254, blue: 0.1333333254, alpha: 1)
         view.addSubview(collectionView)
         collectionView.backgroundColor = #colorLiteral(red: 0.1333333254, green: 0.1333333254, blue: 0.1333333254, alpha: 1)
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
 
         
         
@@ -41,9 +42,8 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.frame.width - 10) / 2
-        
-        
+        let width = (collectionView.frame.width - 10 - collectionView.contentInset.left - collectionView.contentInset.right) / 2
+
         return CGSize(width: width, height: (width - 30) / 2)
         
     }
@@ -74,6 +74,10 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         return header
         
 }
+    //FIXME: 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+            return CGSize(width: 200, height: 50)
+        }
 
     
 }
@@ -104,9 +108,11 @@ class Header: UICollectionReusableView {
         addSubview(nameLabel)
         
         nameLabel.snp.makeConstraints { make in
-//            make.edges.equalTo()
+            make.edges.equalToSuperview()
         }
     }
+    
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
