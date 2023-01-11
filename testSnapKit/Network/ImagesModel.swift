@@ -8,5 +8,5 @@
 import Foundation
 
 struct ImagesModel {
-    
+    // посмотреть АПИ и разобраться в каком формате отдаются данные
 }

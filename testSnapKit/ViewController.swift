@@ -38,7 +38,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
 //            make.top.bottom.equalToSuperview()
         }
         
-        
+        viewModel.fetchImages()
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
