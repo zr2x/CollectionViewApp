@@ -7,27 +7,46 @@
 
 import UIKit
 
+// типо ошибок, разный тип может быть обработан по разному
 enum CustomError: Error {
-    case common, failedURL
+    case common, failedURL, dataNotExist, selfNotExist
 }
 
 protocol NetworkClient {
     
-    func fetchImages() -> Result<ImagesModel, CustomError>
+    // запрашиваем данные ассихронно, ответ или ошибка возвращается через замыкание
+    func fetchImages(complition: @escaping (Result<ImagesModel, CustomError>) -> Void)
 }
 
 class NetworkClientImp: NetworkClient {
     
-    func fetchImages() -> Result<ImagesModel, CustomError> {
+    private let mapper: NetworkMapper
+    
+    init(mapper: NetworkMapper) {
+        self.mapper = mapper
+    }
+    
+    func fetchImages(complition: @escaping (Result<ImagesModel, CustomError>) -> Void) {
+        guard let url = URL(string: "https://api.unsplash.com/photos/?client_id=Ex-lIJXsI3n-yGeyV1jCJ0Mm_pysLRYz0PRa4srNXY0") else {
+            complition(.failure(.failedURL))
+            return
+        }
         
-        guard let url = URL(string: "https://api.unsplash.com/photos/?client_id=Ex-lIJXsI3n-yGeyV1jCJ0Mm_pysLRYz0PRa4srNXY0") else { return .failure(.failedURL)}
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        //retain cycle without [weak self]
+        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let self else {
+                return complition(.failure(.selfNotExist))
+            }
             
+            guard let data else {
+                return complition(.failure(.dataNotExist))
+            }
+            let imagesModel = self.mapper.mapResponse(data: data)
+            
+            complition(.success(imagesModel))
             
         }.resume()
     }
-    
 
     
 }
