@@ -7,11 +7,12 @@
 
 import Foundation
 
-class NetworkMapper {
+class NetworkMapper: Codable {
     
     // JsonDecoder
     
     func mapResponse(data: Data) -> ImagesModel {
         // как преобразовать Data в кастомные структуры
+        
     }
 }

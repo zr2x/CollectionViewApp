@@ -24,7 +24,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        view.backgroundColor = #colorLiteral(red: 0.1333333254, green: 0.1333333254, blue: 0.1333333254, alpha: 1)
+
         view.addSubview(collectionView)
         collectionView.backgroundColor = #colorLiteral(red: 0.1333333254, green: 0.1333333254, blue: 0.1333333254, alpha: 1)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
@@ -33,9 +33,6 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-//            make.left.equalToSuperview().inset(10)
-//            make.right.equalToSuperview().inset(10)
-//            make.top.bottom.equalToSuperview()
         }
         
         viewModel.fetchImages()
@@ -52,7 +49,6 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         let cellViewModel = viewModel.dataSourceArray[indexPath.item]
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? ImageCell else { return .init() }
         cell.configure(cellModel: cellViewModel)
-        cell.backgroundColor = .black
     
         return cell
     }
@@ -86,21 +82,23 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
 //MARK: trying creat header
 class Header: UICollectionReusableView {
     
-        let nameLabel: UILabel = {
-               let label = UILabel()
-               label.numberOfLines = 1
-               label.font = UIFont.systemFont(ofSize: 18)
-               label.sizeToFit()
-               label.textAlignment = .left
-               label.translatesAutoresizingMaskIntoConstraints = false
-               return label
-           }()
+    let nameLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 1
+        label.font = UIFont.systemFont(ofSize: 35)
+        label.textColor = .white
+        label.sizeToFit()
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
     
     var nameTitle: String? {
-            didSet {
-                nameLabel.text = nameTitle
-            }
-
+        didSet {
+            nameLabel.text = nameTitle
+        }
+        
     }
     
     override init(frame: CGRect) {
@@ -111,8 +109,6 @@ class Header: UICollectionReusableView {
             make.edges.equalToSuperview()
         }
     }
-    
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

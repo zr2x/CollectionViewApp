@@ -110,9 +110,9 @@
 		C087986B296DE65300611320 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				C087986E296DE79300611320 /* ImagesModel.swift */,
 				C087986C296DE69400611320 /* NetworkClient.swift */,
 				AE459EA2296DECA900631865 /* NetworkMapper.swift */,
-				C087986E296DE79300611320 /* ImagesModel.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";

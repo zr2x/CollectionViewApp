@@ -7,7 +7,7 @@
 
 import UIKit
 
-//TODO: create image/ create title/
+//MARK: create UI
 
 class ImageCell: UICollectionViewCell {
     
@@ -49,6 +49,7 @@ class ImageCell: UICollectionViewCell {
 //        imageView.image = cellModel.imageURL
     }
     
+    //MARK: Layout UI
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -58,7 +59,7 @@ class ImageCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         contentView.addSubview(authorLabel)
         contentView.addSubview(authorIDLabel)
-        
+        contentView.backgroundColor = .black
        
         
         
