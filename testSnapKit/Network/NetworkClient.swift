@@ -15,7 +15,7 @@ enum CustomError: Error {
 protocol NetworkClient {
     
     // запрашиваем данные ассихронно, ответ или ошибка возвращается через замыкание
-    func fetchImages(complition: @escaping (Result<ImagesModel, CustomError>) -> Void)
+    func fetchImages(complition: @escaping (Result<[ImagesModel], CustomError>) -> Void)
 }
 
 class NetworkClientImp: NetworkClient {
@@ -26,13 +26,12 @@ class NetworkClientImp: NetworkClient {
         self.mapper = mapper
     }
     
-    func fetchImages(complition: @escaping (Result<ImagesModel, CustomError>) -> Void) {
+    func fetchImages(complition: @escaping (Result<[ImagesModel], CustomError>) -> Void) {
         guard let url = URL(string: "https://api.unsplash.com/photos/?client_id=Ex-lIJXsI3n-yGeyV1jCJ0Mm_pysLRYz0PRa4srNXY0") else {
             complition(.failure(.failedURL))
             return
         }
         
-        //retain cycle without [weak self]
         URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             guard let self else {
                 return complition(.failure(.selfNotExist))
@@ -42,9 +41,7 @@ class NetworkClientImp: NetworkClient {
                 return complition(.failure(.dataNotExist))
             }
             let imagesModel = self.mapper.mapResponse(data: data)
-            
             complition(.success(imagesModel))
-            
         }.resume()
     }
 

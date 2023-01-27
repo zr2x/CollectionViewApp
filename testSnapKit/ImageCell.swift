@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SnapKit
 //MARK: create UI
 
 class ImageCell: UICollectionViewCell {

@@ -10,7 +10,7 @@ import SnapKit
 
 class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
-    var viewModel = ImageViewModel()
+    var viewModel = ImageViewModel(client: NetworkClientImp(mapper: NetworkMapper()))
     
     lazy var collectionView : UICollectionView = {
         var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -29,18 +29,14 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         collectionView.backgroundColor = #colorLiteral(red: 0.1333333254, green: 0.1333333254, blue: 0.1333333254, alpha: 1)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
 
-        
-        
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
         viewModel.fetchImages()
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.width - 10 - collectionView.contentInset.left - collectionView.contentInset.right) / 2
-
         return CGSize(width: width, height: (width - 30) / 2)
         
     }
@@ -49,7 +45,6 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         let cellViewModel = viewModel.dataSourceArray[indexPath.item]
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? ImageCell else { return .init() }
         cell.configure(cellModel: cellViewModel)
-    
         return cell
     }
 

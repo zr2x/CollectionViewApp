@@ -20,8 +20,9 @@ class ImageViewModel {
         client.fetchImages { result in
             switch result {
             case .success(let imagesModel):
-                
+                imagesModel.id = 
                 // imagesModel преобразовать в [CellModel] и результат положить dataSourceArray
+                print(imagesModel)
             case .failure(let error):
                 switch error {
                 case .failedURL:
