@@ -9,7 +9,7 @@ import Foundation
 
 //MARK: - ImageModel
 struct ImagesModel: Decodable {
-    // посмотреть АПИ и разобраться в каком формате отдаются данные
+    
     let id: String // ID photo
     let width: Int
     let height: Int

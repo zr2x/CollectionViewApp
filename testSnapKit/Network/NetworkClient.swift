@@ -7,7 +7,7 @@
 
 import UIKit
 
-// типо ошибок, разный тип может быть обработан по разному
+// тип ошибок, разный тип может быть обработан по разному
 enum CustomError: Error {
     case common, failedURL, dataNotExist, selfNotExist
 }

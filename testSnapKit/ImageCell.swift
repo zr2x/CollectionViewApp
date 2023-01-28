@@ -53,9 +53,6 @@ class ImageCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-//        contentView.snp.makeConstraints { make in
-//            make.leftMargin.equalToSuperview().inset(100)
-//        }
         contentView.addSubview(imageView)
         contentView.addSubview(authorLabel)
         contentView.addSubview(authorIDLabel)

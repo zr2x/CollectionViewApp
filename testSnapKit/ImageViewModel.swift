@@ -8,7 +8,7 @@
 import Foundation
 
 class ImageViewModel {
-    let dataSourceArray : [CellModel] = [CellModel(authorName: "Author: Vladislav", authorID: "Photo ID: 1234567", imageURL: someURL!), CellModel(authorName: "Authour: Maksim", authorID: "Photo ID: 7654321", imageURL: someURL!), CellModel(authorName: "Authour: Viktor", authorID: "Photo ID: 0987654", imageURL: someURL!), CellModel(authorName: "Author: somesome", authorID: "Photo ID: 0123456", imageURL: someURL!)]
+    var dataSourceArray : [CellModel] = []
     
     private let client: NetworkClient
     
@@ -17,12 +17,17 @@ class ImageViewModel {
     }
 
     func fetchImages() {
-        client.fetchImages { result in
+        client.fetchImages { [weak self] result in
             switch result {
             case .success(let imagesModel):
-                imagesModel.id = 
-                // imagesModel преобразовать в [CellModel] и результат положить dataSourceArray
-                print(imagesModel)
+                self?.dataSourceArray = imagesModel.compactMap { modelOfArray in
+                    CellModel(authorName: "Author name: \(modelOfArray.user.username)",
+                              authorID: "Photo ID: \(modelOfArray.id)",
+                              imageURL: URL(string: modelOfArray.urls.regular) ?? someURL)
+                    
+                }
+                
+                
             case .failure(let error):
                 switch error {
                 case .failedURL:
@@ -40,6 +45,6 @@ class ImageViewModel {
     
 }
 
-let someURL = URL(string: "google.com")
+let someURL = URL(string: "google.com")!
 
 
