@@ -45,6 +45,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         let cellViewModel = viewModel.dataSourceArray[indexPath.item]
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? ImageCell else { return .init() }
         cell.configure(cellModel: cellViewModel)
+        
         return cell
     }
 
