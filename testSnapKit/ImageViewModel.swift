@@ -16,17 +16,16 @@ class ImageViewModel {
         self.client = client
     }
 
-    func fetchImages() {
-        client.fetchImages { [weak self] result in
-            switch result {
-            case .success(let imagesModel):
-                self?.dataSourceArray = imagesModel.compactMap { modelOfArray in
-                    CellModel(authorName: "Author name: \(modelOfArray.user.username)",
-                              authorID: "Photo ID: \(modelOfArray.id)",
-                              imageURL: URL(string: modelOfArray.urls.regular) ?? someURL)
-                    
-                }
-                
+//    func fetchImages() {
+//        client.fetchImages { [weak self] result in
+//            switch result {
+//            case .success(let imagesModel):
+//                self?.dataSourceArray = imagesModel.compactMap { modelOfArray in
+//                    CellModel(authorName: "Author name: \(modelOfArray.user.username)",
+//                              authorID: "Photo ID: \(modelOfArray.id)",
+//                              imageURL: URL(string: modelOfArray.urls.regular) ?? someURL)
+//                    
+//                }
                 
             case .failure(let error):
                 switch error {

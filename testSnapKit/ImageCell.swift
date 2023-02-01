@@ -27,7 +27,7 @@ class ImageCell: UICollectionViewCell {
         authorLabel.textColor = .white
         authorLabel.font = UIFont(name: "AppleSDGothicNeo-Regular",size: 14)
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
-        authorLabel.numberOfLines = 0
+        authorLabel.numberOfLines = 2
         return authorLabel
         
     }()
@@ -37,7 +37,7 @@ class ImageCell: UICollectionViewCell {
         authorIDLabel.textColor = #colorLiteral(red: 0.6666666269, green: 0.6666668057, blue: 0.67097193, alpha: 1)
         authorIDLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 12)
         authorIDLabel.translatesAutoresizingMaskIntoConstraints = false
-        authorIDLabel.numberOfLines = 0
+        authorIDLabel.numberOfLines = 2
         return authorIDLabel
     }()
     
